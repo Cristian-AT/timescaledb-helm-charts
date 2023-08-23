@@ -45,6 +45,9 @@ spec:
         runAsNonRoot: true
         runAsUser: {{ template "postgres.uid" }}
       initContainers:
+      {{- if .Values.initContainers }}
+      {{- include "common.tplvalues.render" ( dict "value" .Values.initContainers "context" $ ) | nindent 8 }}
+      {{- end }}
       {{- if .Values.timescaledbTune.enabled }}
       - name: tstune
         securityContext:

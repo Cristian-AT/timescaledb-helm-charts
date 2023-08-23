@@ -36,6 +36,9 @@ spec:
         runAsNonRoot: true
         runAsUser:  {{ template "postgres.uid" }}
       initContainers:
+      {{- if .Values.initContainers }}
+      {{- include "common.tplvalues.render" ( dict "value" .Values.initContainers "context" $ ) | nindent 8 }}
+      {{- end }}
       - name: initdb
         securityContext:
           allowPrivilegeEscalation: false

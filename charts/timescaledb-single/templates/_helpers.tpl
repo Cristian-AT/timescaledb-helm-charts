@@ -87,6 +87,23 @@ Create the name of the service account to use.
 {{ .Values.secrets.pgbackrestSecretName | default (printf "%s-pgbackrest" (include "clusterName" .)) | quote }}
 {{- end -}}
 
+{{- define "common.tplvalues.render" -}}
+{{- if .scope }}
+  {{- if typeIs "string" .value }}
+    {{- tpl (cat "{{- with $.RelativeScope -}}" .value  "{{- end }}") (merge (dict "RelativeScope" .scope) .context) }}
+  {{- else }}
+    {{- tpl (cat "{{- with $.RelativeScope -}}" (.value | toYaml)  "{{- end }}") (merge (dict "RelativeScope" .scope) .context) }}
+  {{- end }}
+{{- else }}
+  {{- if typeIs "string" .value }}
+    {{- tpl .value .context }}
+  {{- else }}
+    {{- tpl (.value | toYaml) .context }}
+  {{- end }}
+{{- end -}}
+{{- end -}}
+
+
 {{/*
 Generate common labels to be used
 */}}
