@@ -404,7 +404,17 @@ persistentVolumes:
     # example2:
     #   size: 5Gi
     #   storageClass: gp2
-
+    
+# initContainers: []
+  initContainers:
+    - name: volume-permissions
+      image: busybox:1.31.1
+      command: ["sh", "-c", "chown -R 65534:65534 /data"]
+      securityContext:
+        runAsUser: 0
+      volumeMounts:
+        - name: storage-volume
+          mountPath: /data
 resources: {}
   # If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
