@@ -106,7 +106,7 @@ properties:
           - "null"
   persistentVolumes:
     type: object
-    additionalProperties: false
+    additionalProperties: true
     properties:
       data:
         "$ref": "#/definitions/volume"
