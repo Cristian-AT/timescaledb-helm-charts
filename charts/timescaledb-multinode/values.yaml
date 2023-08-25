@@ -44,7 +44,9 @@ persistentVolume:
   ## If undefined (the default) or set to null, no storageClassName spec is
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
-  ##
+  
+  existingClaim: ""
+
   storageClass: "cfs-sc"
   subPath: ""
   mountPath: "/var/lib/postgresql"
