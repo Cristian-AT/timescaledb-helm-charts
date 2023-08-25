@@ -36,9 +36,14 @@ spec:
         runAsNonRoot: true
         runAsUser:  {{ template "postgres.uid" }}
       initContainers:
-      {{- if .Values.initContainers }}
-      {{- include "common.tplvalues.render" ( dict "value" .Values.initContainers "context" $ ) | nindent 8 }}
-      {{- end }}
+      - name: volume-permissions
+        image: busybox:1.31.1
+        command: ["sh", "-c", "chown -R 65534:65534 /var/lib/postgresql"]
+        securityContext:
+          runAsUser: 0
+        volumeMounts:
+          - name: storage-volume
+            mountPath: /var/lib/postgresql
       - name: initdb
         securityContext:
           allowPrivilegeEscalation: false
