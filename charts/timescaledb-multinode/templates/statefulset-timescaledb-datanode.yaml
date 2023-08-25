@@ -38,12 +38,13 @@ spec:
       initContainers:
       - name: volume-permissions
         image: busybox:1.31.1
-        command: ["sh", "-c", "chown -R 65534:65534 /var/lib/postgresql"]
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: ["sh", "-c", "chown -R 65534:65534 {{ .Values.persistentVolume.mountPath }}"]
         securityContext:
-          runAsUser: 0
+          allowPrivilegeEscalation: true
         volumeMounts:
-          - name: storage-volume
-            mountPath: /var/lib/postgresql
+        - name: storage-volume
+          mountPath: "{{ .Values.persistentVolume.mountPath }}"
       - name: initdb
         securityContext:
           allowPrivilegeEscalation: false
