@@ -36,7 +36,7 @@ spec:
         runAsNonRoot: true
         runAsUser:  {{ template "postgres.uid" }}
       initContainers:
-      {{- if and .Values.volumePermissions.enabled }}
+      {{- if and .Values.persistentVolume.volumePermissions.enabled }}
         - name: volume-permissions
           image: busybox:1.31.1
           imagePullPolicy: {{ .Values.image.pullPolicy }}
