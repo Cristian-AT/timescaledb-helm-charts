@@ -496,7 +496,7 @@
       "type": "object"
     },
     "persistentVolumes": {
-      "additionalProperties": false,
+      "additionalProperties": true,
       "properties": {
         "data": {
           "$ref": "#/definitions/volume"
