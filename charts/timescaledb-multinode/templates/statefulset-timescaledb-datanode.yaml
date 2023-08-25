@@ -62,7 +62,7 @@ spec:
               name: {{ template "timescaledb.dataname" . }}
               key: password-superuser
           {{- if .Values.env }}
-          {{ .Values.env | default list | toYaml | indent 8 }}
+{{ .Values.env | default list | toYaml | indent 8 }}
           {{- end }}
         command:
           - sh
