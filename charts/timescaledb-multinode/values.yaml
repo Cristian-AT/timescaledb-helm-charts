@@ -48,15 +48,9 @@ persistentVolume:
   storageClass: "cfs-sc"
   subPath: ""
   mountPath: "/var/lib/postgresql"
-  volumePermissions: false
   annotations: {}
   accessModes:
     - ReadWriteOnce
-
-  
-
-
-
 
 resources: {}
   # If you do want to specify resources, uncomment the following
