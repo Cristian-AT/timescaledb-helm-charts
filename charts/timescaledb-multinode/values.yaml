@@ -48,7 +48,7 @@ persistentVolume:
   storageClass: "cfs-sc"
   subPath: ""
   mountPath: "/var/lib/postgresql"
-  volumePemissions: false
+  volumePermissions: false
   annotations: {}
   accessModes:
     - ReadWriteOnce
