@@ -37,7 +37,7 @@ env:
 
 persistentVolume:
   enabled: true
-  size: 50G
+  size: 50Gi
   ## database data Persistent Volume Storage Class
   ## If defined, storageClassName: <storageClass>
   ## If set to "-", storageClassName: "", which disables dynamic provisioning
