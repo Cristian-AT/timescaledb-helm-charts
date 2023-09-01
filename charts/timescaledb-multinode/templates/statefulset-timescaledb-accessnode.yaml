@@ -39,16 +39,6 @@ spec:
       {{- if .Values.initContainers }}
       {{- include "common.tplvalues.render" ( dict "value" .Values.initContainers "context" $ ) | nindent 8 }}
       {{- end }}
-      - name: volume-permissions
-        image: busybox:1.31.1
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
-        command: ["sh", "-c", "chown -R 1000:1000 {{ .Values.persistentVolume.mountPath }}"]
-        securityContext:
-          allowPrivilegeEscalation: true
-          runAsUser: 0
-        volumeMounts:
-        - name: storage-volume
-          mountPath: "{{ .Values.persistentVolume.mountPath }}"
       - name: initdb
         securityContext:
           allowPrivilegeEscalation: false
