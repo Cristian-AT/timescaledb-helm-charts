@@ -36,15 +36,6 @@ spec:
         runAsNonRoot: true
         runAsUser:  {{ template "postgres.uid" }}
       initContainers:
-      - name: volume-permissions
-        image: busybox:1.31.1
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
-        command: ["sh", "-c", "chown -R 65534:65534 {{ .Values.persistentVolume.mountPath }}"]
-        securityContext:
-          allowPrivilegeEscalation: true
-        volumeMounts:
-        - name: storage-volume
-          mountPath: "{{ .Values.persistentVolume.mountPath }}"
       - name: initdb
         securityContext:
           allowPrivilegeEscalation: false
